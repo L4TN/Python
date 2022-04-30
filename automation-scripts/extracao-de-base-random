@@ -1,0 +1,44 @@
+import csv
+from ntpath import join
+from operator import index
+from random import sample
+
+
+with open('arquivo.csv', mode ='r', encoding='ISO-8859-1')as file:
+# Abertura da planilha e leitura dos dados 
+    # ficheiro = open('arquivo.csv', "rt", encoding='ISO-8859-1')
+
+    # Criação do objeto csv.reader
+    reader = list(csv.reader(file))
+    quantidade_de_linhas=0
+
+    # Leitura dos dados e contagem da quantidade de linhas
+    for linha in reader:
+        print(' '.join(linha))
+        quantidade_de_linhas += 1    
+    print(quantidade_de_linhas)
+        
+    #Obtendo 5% dos dados aleatoriamente
+    quantidade_de_linhas_aleatoria = int(quantidade_de_linhas * 5/100)
+    print(quantidade_de_linhas_aleatoria)
+
+    #Sorteia N valores dentro de um intervalo [k, k + ...], sem repetições, implementando um range(k, k+...), utilizando o método sample da biblioteca random.
+    sorteados = sample(range(0, quantidade_de_linhas), quantidade_de_linhas_aleatoria)
+    print(sorteados)
+
+    #Criação do arquivo csv com os dados sorteados
+    f = open('base_sorteados.csv', 'w')
+    
+    for i in sorteados:
+        print(i)
+        print(reader[i])
+        f.write('\n' + str(reader[i]))
+
+    #Fechamento do ficheiro
+    f.close()
+
+
+
+
+
+
